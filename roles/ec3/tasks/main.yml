@@ -1,0 +1,64 @@
+---
+# tasks file for ec3
+- include_vars: ./vars/main.yml
+- name: ensure apt-get is up to date and install items
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  with_items: "{{apt_list}}"
+- name: Install pip packages
+  pip:
+    name: "{{item}}"
+    state: present
+  with_items: "{{pip_list}}"
+- shell: 'pip3 install docker'
+- name: setup glances for monitoring
+  template:
+    src: templates/glances.service.j2
+    dest: /etc/systemd/system/glances.service
+    owner: root
+    group: root
+    mode: 0111
+- name: start glances
+  service:
+    name: glances
+    state: started
+- name: Make sure we have a 'wheel' group
+  group:
+    name: wheel
+    state: present
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+- name: create user
+  user:
+    name: "{{user.name}}"
+    comment: 'The man, the myth, the legend'
+    groups: wheel, docker
+    append: yes
+    state: present
+    createhome: yes
+- name: Create authorized key from git account public key
+  authorized_key:
+    user: "{{user.name}}"
+    key: https://github.com/hardhero.keys
+    state: present
+- name: Create docker container folders
+  file:
+    path: "{{item.value.container_path}}"
+    state: directory
+    mode: 0775
+    owner: "{{user.name}}"
+  with_dict: "{{container_vars}}"
+- name: Create media folders
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0775
+    owner: "{{user.name}}"
+  with_items: "{{media_folders}}"
+- include_tasks: containers.yml
