@@ -16,7 +16,7 @@ docker run -d \
     -e VPN_ENABLED=yes \
     -e VPN_USER={{pia_user}} \
     -e VPN_PASS={{pia_pass}} \
-    -e VPN_REMOTE=us-texas.privateinternetaccess.com \
+    -e STRICT_PORT_FORWARD=yes \
     -e VPN_PORT=1198 \
     -e VPN_PROTOCOL=udp \
     -e VPN_DEVICE_TYPE=tun \
