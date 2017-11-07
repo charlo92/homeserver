@@ -1,0 +1,64 @@
+---
+- name: Build delugevpn container
+  docker_container:
+    name: delugevpn
+    image: binhex/arch-delugevpn
+    pull: true
+    state: started
+    detach: true
+    capabilities: NET_ADMIN
+    env:
+      VPN_ENABLED: yes
+      VPN_USER: "{{pia_user}}"
+      VPN_PASS: "{{pia_pass}}"
+      STRICT_PORT_FORWARD: yes
+      VPN_PORT: 1198
+      VPN_PROTOCOL: udp
+      VPN_DEVICE_TYPE: tun
+      VPN_PROV: pia
+      STRONG_CERTS: no
+      ENABLE_PRIVOXY: yes
+      LAN_NETWORK: 10.0.0.0/24
+      NAME_SERVERS: 8.8.8.8,8.8.4.4
+      DEBUG: false
+      UMASK: 000
+      PUID: "{{user.PID}}"
+      PGID: "{{user.PID}}"
+    ports:
+      - 8112:8112
+      - 8118:8118
+      - 58846:58846
+      - 58946:58946
+    volumes:
+      - /docker/downloads:/data/completed
+      - /docker/containers/deluge/data:/data
+      - /docker/containers/deluge/config:/config
+      - /etc/localtime:/etc/localtime:ro
+- name: create /tmp/ovpn for files
+  file:
+    path: "{{ovpn_folder}}"
+    state: directory
+    mode: 0755
+    owner: "{{user.name}}"
+    group: wheel
+- name: get .ovpn files
+  get_url:
+    url: https://www.privateinternetaccess.com/openvpn/openvpn.zip
+    dest: "{{ovpn_folder}}/"
+    mode: 0775
+- name: unzip files
+  unarchive:
+    src: https://www.privateinternetaccess.com/openvpn/openvpn.zip
+    dest: "{{ovpn_folder}}/"
+    remote_src: yes
+- name: Copy each file over that matches the given pattern
+  copy:
+    src: "{{ovpn_folder}}/{{ item }}"
+    dest: "{{container_vars.delugevpn.container_path}}/config/openvpn/"
+    owner: "{{user.name}}"
+    group: wheel
+    mode: 0755
+  with_fileglob:
+    - /*Netherlands.ovpn
+    - /*.crt
+    - /*.pem

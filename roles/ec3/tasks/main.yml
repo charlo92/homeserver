@@ -12,14 +12,13 @@
     name: "{{item}}"
     state: present
   with_items: "{{pip_list}}"
-- shell: 'pip3 install docker'
 - name: setup glances for monitoring
   template:
     src: templates/glances.service.j2
     dest: /etc/systemd/system/glances.service
     owner: root
     group: root
-    mode: 0111
+    mode: 00111
 - name: start glances
   service:
     name: glances
@@ -61,4 +60,5 @@
     mode: 0775
     owner: "{{user.name}}"
   with_items: "{{media_folders}}"
-- include_tasks: containers.yml
+- import_tasks: containers.yml
+- import_tasks: delugevpn.yml

@@ -11,6 +11,7 @@ provisioner:
   ansible_verbose: true
   ansible_version: latest
   playbook: site.yml
+  ansible_vault_password_file: .vault_pass
   require_chef_for_busser: false
   additional_ssh_private_keys:
   - ~/.ssh/hardhero-github
