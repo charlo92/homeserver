@@ -39,23 +39,3 @@
     env: "{{container_vars.jackett.env_vars}}"
     ports: "{{container_vars.jackett.ports}}"
     volumes: "{{container_vars.jackett.volumes}}"
-- name: place run-deluge.sh
-  template:
-    src: templates/run-delugevpn.sh.j2
-    dest: "{{container_vars.delugevpn.container_path}}/run-delugevpn.sh"
-    owner: "{{user.PID}}"
-    group: "{{user.PID}}"
-    mode: 0755
-- name: Build Deluge server
-  shell: "{{container_vars.delugevpn.container_path}}/run-delugevpn.sh"
-  ignore_errors: yes
-- name: get .ovpn files
-  get_url:
-    url: https://www.privateinternetaccess.com/openvpn/openvpn.zip
-    dest: "{{container_vars.delugevpn.container_path}}/config/openvpn/openvpn.zip"
-    mode: 0755
-- name: unzip files
-  unarchive:
-    src: "{{container_vars.delugevpn.container_path}}/config/openvpn/openvpn.zip"
-    dest: "{{container_vars.delugevpn.container_path}}/config/openvpn/"
-    remote_src: yes

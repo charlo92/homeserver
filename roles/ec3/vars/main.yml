@@ -1,5 +1,6 @@
 ---
 # vars file for ec3
+ovpn_folder: /tmp/ovpn
 container_vars:
   plex:
     container_path: /docker/containers/plex/
@@ -24,7 +25,7 @@ container_vars:
       VPN_ENABLED: yes
       VPN_USER: "{{pia_user}}"
       VPN_PASS: "{{pia_pass}}"
-      VPN_REMOTE: us-texas.privateinternetaccess.com
+      STRICT_PORT_FORWARD: yes
       VPN_PORT: 1198
       VPN_PROTOCOL: udp
       VPN_DEVICE_TYPE: tun
@@ -85,7 +86,7 @@ apt_list:
   - vim
   - python-pip
   - python3-pip
-  - jq
+  - unzip
 pip_list:
   - docker-py
   - bottle
