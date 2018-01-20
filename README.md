@@ -5,3 +5,10 @@
         ansible-galaxy install angstwad.docker_ubuntu
 3. run
         ansible-playbook -i prod site.yml --vault-password-file .vault_pass
+
+# Things to Fix
+* For some reason the plex container needs to be run with a shell script built from a j2 template.
+
+# Things to make better
+* Breakout containers into individual task lists
+* Set all containers to start on boot with systemd
