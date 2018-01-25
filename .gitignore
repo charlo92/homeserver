@@ -3,4 +3,7 @@
 .kitchen/
 site_retry
 *.lock
+*.retry
+chefignore
+tmp/
 .kitchen.local.yml
