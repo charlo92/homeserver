@@ -2,3 +2,5 @@
 .DS_Store
 .kitchen/
 site_retry
+*.lock
+.kitchen.local.yml
