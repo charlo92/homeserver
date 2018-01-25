@@ -1,0 +1,20 @@
+---
+- name: Build plex server
+  docker_container:
+    name: plex
+    image: linuxserver/plex
+    pull: true
+    state: started
+    detach: true
+    network_mode: host
+    env:
+      VERSION: latest
+      TZ: CST
+      PUID: "{{user.PID}}"
+      PGID: "{{user.PID}}"
+    volumes: 
+      - "/docker/containers/plex/config:/config"
+      - "/docker/media/movies/:/data/movies"
+      - "/docker/media/tv:/data/tvshows"
+      - "/docker/media/tv-manual:/data/tv-manual"
+      - "/docker/containers/plex/transcoders:/transcode"
