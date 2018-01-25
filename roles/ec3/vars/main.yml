@@ -4,83 +4,14 @@ ovpn_folder: /tmp/ovpn
 container_vars:
   plex:
     container_path: /docker/containers/plex/
-    volumes:
-      - "/docker/containers/plex/config:/config"
-      - "/docker/media/movies/:/data/movies"
-      - "/docker/media/tv:/data/tvshows"
-      - "/docker/containers/plex/transcoders:/transcode"
-    env_vars:
-      VERSION: latest
-      TZ: CST
-      PUID: "{{user.PID}}"
-      PGID: "{{user.PID}}"
   delugevpn:
     container_path: /docker/containers/deluge
-    volumes:
-      - /docker/downloads:/data/completed
-      - /docker/containers/deluge/data:/data
-      - /docker/containers/deluge/config:/config
-      - /etc/localtime:/etc/localtime:ro
-    env_vars:
-      VPN_ENABLED: yes
-      VPN_USER: "{{pia_user}}"
-      VPN_PASS: "{{pia_pass}}"
-      STRICT_PORT_FORWARD: yes
-      VPN_PORT: 1198
-      VPN_PROTOCOL: udp
-      VPN_DEVICE_TYPE: tun
-      VPN_PROV: pia
-      STRONG_CERTS: no
-      ENABLE_PRIVOXY: yes
-      LAN_NETWORK: 10.0.0.0/24
-      NAME_SERVERS: 8.8.8.8,8.8.4.4
-      DEBUG: false
-      UMASK: 000
-      PUID: "{{user.PID}}"
-      PGID: "{{user.PID}}"
-    ports:
-      - 8112:8112
-      - 8118:8118
-      - 58846:58846
-      - 58946:58946
   sonarr:
     container_path: /docker/containers/sonarr
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /docker/containers/sonarr/config:/config
-      - /docker/media/tv:/tv
-      - /docker/downloads:/data/completed
-    env_vars:
-      PUID: "{{user.PID}}"
-      PGID: "{{user.PID}}"
-      TZ: CST
-    ports:
-      - 8989:8989
   radarr:
     container_path: /docker/containers/radarr
-    volumes:
-      - /docker/containers/radarr/config:/config
-      - /docker/downloads:/data/completed
-      - /docker/media/movies:/movies
-      - /etc/localtime:/etc/localtime:ro
-    env_vars:
-      TZ: CST
-      PGID: "{{user.PID}}"
-      PUID: "{{user.PID}}"
-    ports:
-      - 7878:7878
   jackett:
     container_path: /docker/containers/jackett
-    volumes:
-      - /docker/containers/jackett/config:/config
-      - /docker/containers/jackett/downloads:/downloads
-      - /etc/localtime:/etc/localtime:ro
-    env_vars:
-      TZ: CST
-      PGID: "{{user.PID}}"
-      PUID: "{{user.PID}}"
-    ports:
-      - 9117:9117
 apt_list:
   - docker
   - vim

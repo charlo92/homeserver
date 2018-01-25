@@ -60,5 +60,8 @@
     mode: 0775
     owner: "{{user.name}}"
   with_items: "{{media_folders}}"
-- import_tasks: containers.yml
-- import_tasks: delugevpn.yml
+- import_tasks: 'delugevpn.yml'
+- import_tasks: 'plex.yml'
+- import_tasks: 'sonarr.yml'
+- import_tasks: 'radarr.yml'
+- import_tasks: 'jackett.yml'
