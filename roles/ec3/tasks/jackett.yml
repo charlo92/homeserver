@@ -6,6 +6,7 @@
     pull: true
     state: started
     detach: true
+    restart_policy: always
     env:
       TZ: CST
       PGID: "{{user.PID}}"
