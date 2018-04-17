@@ -65,3 +65,4 @@
 - import_tasks: 'sonarr.yml'
 - import_tasks: 'radarr.yml'
 - import_tasks: 'jackett.yml'
+- import_tasks: 'transmission.yml'
