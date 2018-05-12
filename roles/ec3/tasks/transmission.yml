@@ -21,7 +21,8 @@
       - 9091:9091
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/containers/transmission/data:/data
+      - /docker/containers/transmission/data:/data/transmission-home
+      - /docker/downloads:/data/complete
     capabilities:
       - NET_ADMIN
     devices:
