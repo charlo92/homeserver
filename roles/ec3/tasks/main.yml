@@ -46,22 +46,24 @@
     user: "{{user.name}}"
     key: https://github.com/hardhero.keys
     state: present
-- name: Create docker container folders
+- name: Create container folders
   file:
-    path: "{{item.value.container_path}}"
+    path: "{{containers_folder}}"
     state: directory
     mode: 0775
     owner: "{{user.name}}"
-  with_dict: "{{container_vars}}"
-- name: Create media folders
-  file:
-    path: "{{ item }}"
-    state: directory
-    mode: 0775
-    owner: "{{user.name}}"
-  with_items: "{{media_folders}}"
+- name: mount product image folder share
+  mount: 
+    state: "mounted" 
+    fstype: "cifs" 
+    opts: "username={{nas_user}},password={{nas_pass}},uid={{user.name}},gid={{user.name}},file_mode=0755,dir_mode=0755,exec" 
+    src: //10.0.0.62/data/home/andrew/docker
+    name: "/docker"
+  handler: Restart docker
 - import_tasks: 'plex.yml'
 - import_tasks: 'sonarr.yml'
 - import_tasks: 'radarr.yml'
 - import_tasks: 'jackett.yml'
 - import_tasks: 'transmission.yml'
+- import_tasks: 'muximux.yml'
+

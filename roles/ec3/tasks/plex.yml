@@ -14,8 +14,9 @@
       PUID: "{{user.PID}}"
       PGID: "{{user.PID}}"
     volumes:
-      - "/docker/containers/plex/config:/config"
+      - "{{containers_folder}}/plex/config:/config"
       - "/docker/media/movies/:/data/movies"
       - "/docker/media/tv:/data/tvshows"
       - "/docker/media/tv-manual:/data/tv-manual"
-      - "/docker/containers/plex/transcoders:/transcode"
+      - "{{containers_folder}}/plex/transcoder:/transcode"
+ 

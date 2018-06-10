@@ -1,25 +1,14 @@
 ---
 # vars file for ec3
+nas_address: //10.0.0.62/data/home/andrew/docker
 ovpn_folder: /tmp/ovpn
-container_vars:
-  plex:
-    container_path: /docker/containers/plex/
-  delugevpn:
-    container_path: /docker/containers/deluge
-  sonarr:
-    container_path: /docker/containers/sonarr
-  radarr:
-    container_path: /docker/containers/radarr
-  jackett:
-    container_path: /docker/containers/jackett
+containers_folder: /opt/amc/containers
 apt_list:
   - docker
   - vim
-  - python-pip
-  - python3-pip
   - unzip
+  - cifs-utils
 pip_list:
-  - docker-py
   - bottle
   - glances
 media_folders:

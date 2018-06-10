@@ -15,6 +15,6 @@
       - 8989:8989
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/containers/sonarr/config:/config
+      - "{{containers_folder}}/sonarr/config:/config"
       - /docker/media/tv:/tv
       - /docker/downloads:/data/completed

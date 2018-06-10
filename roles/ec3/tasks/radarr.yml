@@ -14,7 +14,7 @@
     ports:
       - 7878:7878
     volumes:
-      - /docker/containers/radarr/config:/config
+      - "{{containers_folder}}/radarr/config:/config"
       - /docker/downloads:/data/completed
       - /docker/media/movies:/movies
       - /etc/localtime:/etc/localtime:ro
