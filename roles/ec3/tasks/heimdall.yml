@@ -1,8 +1,8 @@
 ---
-- name: Build muximux
+- name: Build heimdall
   docker_container:
-    name: muximux
-    image: linuxserver/muximux
+    name: heimdall
+    image: linuxserver/heimdall
     pull: true
     state: started
     detach: true
@@ -13,5 +13,6 @@
       TZ: CST
     ports:
       - 80:80
+      - 443:443
     volumes:
-      - "{{containers_folder}}/muximux/config:/config"
+      - "{{containers_folder}}/heimdall/config:/config"
