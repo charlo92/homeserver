@@ -41,11 +41,6 @@
     append: yes
     state: present
     createhome: yes
-- name: Create authorized key from git account public key
-  authorized_key:
-    user: "{{user.name}}"
-    key: https://github.com/hardhero.keys
-    state: present
 - name: Create container folders
   file:
     path: "{{containers_folder}}"
