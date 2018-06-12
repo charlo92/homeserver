@@ -61,7 +61,7 @@ This playbook installs glances on the host and runs its web application as a ser
 
 ### .kitchen.yml file
 
-It is useful to have a quick way to test the playbook and not change the server at all. Test-kitchen has a plugin to provision vagrant boxes with Ansible. Makes testing really easy.
+It is useful to have a quick way to test the playbook and not change the server at all. Test-kitchen has a plugin to provision vagrant boxes with Ansible. Makes testing really easy.  
 
 ## Things to Fix
 
