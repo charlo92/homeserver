@@ -8,3 +8,4 @@ site_retry
 chefignore
 tmp/
 .kitchen.local.yml
+host_vars/vault.yml
