@@ -1,2 +1,2 @@
 [homelab]
-cheezernet ansible_host=ec3 ansible_user=andrew ansible_ssh_private_key_file=~/.ssh/cheezernet/ec3-homelab-andrew
+homeserver ansible_host=ec3 ansible_user=andrew ansible_ssh_private_key_file=homelab-andrew
