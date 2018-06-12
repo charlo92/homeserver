@@ -65,6 +65,12 @@ It is useful to have a quick way to test the playbook and not change the server 
 
 ## Things to Fix
 
+## Improvements
+
+Simple nginx proxy server to route traffic between containers with pseudo-DNS names.
+
+Post system requirements.
+
 ## Legal Stuff
 
 This code is posted exclusively for private use and should not be used for any illicit activity.
