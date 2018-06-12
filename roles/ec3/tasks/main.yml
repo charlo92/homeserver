@@ -60,6 +60,5 @@
 - import_tasks: 'radarr.yml'
 - import_tasks: 'jackett.yml'
 - import_tasks: 'transmission.yml'
-- import_tasks: 'muximux.yml'
 - import_tasks: 'heimdall.yml'
 
