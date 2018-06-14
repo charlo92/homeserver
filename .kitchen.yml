@@ -22,6 +22,10 @@ platforms:
       provision_command:
         - apt-get install python -y
         - apt-get install ansible -y
+  - name: ubuntu-18.04
+    driver_config:
+      provision_command:
+        - apt-get install python ansible docker-y
 suites:
   - name: default
 
