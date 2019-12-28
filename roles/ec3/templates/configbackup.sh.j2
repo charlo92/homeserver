@@ -1,0 +1,10 @@
+#/bin/sh
+
+TODAY=$(date +"%m%d%y")
+
+
+docker stop $(docker ps -a -q)
+
+tar -czvf configbackup-$TODAY.tar.gz {{containers_folder}}
+
+docker start $(docker ps -a -q)

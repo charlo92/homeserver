@@ -1,6 +1,7 @@
 ---
 # vars file for ec3
 nas_address: //10.0.0.62/data/home/andrew/docker
+local_nas_folder: /docker
 ovpn_folder: /tmp/ovpn
 containers_folder: /opt/amc/containers
 apt_list:

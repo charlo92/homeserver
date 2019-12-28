@@ -15,7 +15,7 @@
       OPENVPN_CONFIG: Sweden
       OPENVPN_USERNAME: '{{pia_user}}'
       OPENVPN_PASSWORD: '{{pia_pass}}'
-      WEBPROXY_ENABLED: false
+      WEBPROXY_ENABLED: 'false'
       LOCAL_NETWORK: 10.0.0.0/24
     ports:
       - 9091:9091

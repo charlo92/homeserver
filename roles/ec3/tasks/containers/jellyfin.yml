@@ -1,0 +1,20 @@
+---
+- name: Build jellyfin
+  docker_container:
+    name: jellyfin
+    image: linuxserver/jellyfin
+    pull: true
+    state: started
+    detach: true
+    restart_policy: unless-stopped
+    env:
+      TZ: CST
+      PGID: "{{user.PID}}"
+      PUID: "{{user.PID}}"
+    ports:
+      - 8096:8096 
+      - 8920:8920
+    volumes:
+      - "{{containers_folder}}/jellyfin/config:/config"
+      - /docker/media/movies:/data/movies
+      - /docker/media/tv:/data/tvshows

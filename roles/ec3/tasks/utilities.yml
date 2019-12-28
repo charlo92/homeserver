@@ -1,0 +1,21 @@
+---
+### Glances for monitoring
+- name: setup glances for monitoring
+  template:
+    src: templates/glances.service.j2
+    dest: /etc/systemd/system/glances.service
+    owner: root
+    group: root
+    mode: 00111
+- name: start glances
+  service:
+    name: glances
+    state: started
+- name: mount product image folder share
+  mount: 
+    state: "mounted" 
+    fstype: "cifs" 
+    opts: "username={{nas_user}},password={{nas_pass}},uid={{user.name}},gid={{user.name}},file_mode=0755,dir_mode=0755,exec" 
+    src: //10.0.0.62/data/home/andrew/docker
+    name: "/docker"
+  notify: Restart docker
